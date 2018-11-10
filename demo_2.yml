@@ -14,7 +14,7 @@
         password: "{{ vcenter_pass }}"
         validate_certs: no 
         folder: "{{ folder }}"
-        datacenter: "{{ datacenter }}"
+        datacenter: "{{ datacenter_2 }}"
         networks:
           - name: "{{ network }}"
             type: dhcp
