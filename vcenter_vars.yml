@@ -17,7 +17,7 @@
 - datacenter_2: Demo
 - cluster_2: Cluster-1
 - datastore: Demo-Datastore-1
-- network: VM Private
+- network: VM-Private
 - folder: /vm
 - dns_server: 8.8.8.8
 
