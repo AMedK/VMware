@@ -12,8 +12,8 @@
 - esxi_password: HgXyWE4b
 
 # VM settings
-- vm_name: VM_168
-- template_name: Ansible
+# - vm_name: VM_168
+# - template_name: Ansible
 - datacenter_2: Demo
 - cluster_2: Cluster-1
 - datastore: Demo-Datastore-1
