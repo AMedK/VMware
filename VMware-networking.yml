@@ -28,7 +28,7 @@
         username: "{{ esxi_username }}"
         password: "{{ esxi_password }}"
         esxi_hostname: "{{ esxi_hostname }}"
-        switch_name: vswitch1
+        switch_name: vSwitch1
         nic_name: vmnic1
         validate_certs: no
         mtu: 9000
@@ -52,7 +52,7 @@
         password: "{{ esxi_password }}"
         esxi_hostname: "{{ esxi_hostname }}"
         hosts: "{{ esxi_hostname }}"
-        switch_name: vswitch0
+        switch_name: vSwitch0
         validate_certs: no
         portgroup_name: VM-Private
         vlan_id: 0
@@ -80,7 +80,7 @@
         username: "{{ esxi_username }}"
         password: "{{ esxi_password }}"
         hosts: "{{ esxi_hostname }}"
-        switch_name: vswitch1
+        switch_name: vSwitch1
         validate_certs: no
         portgroup_name: Management Network
         vlan_id: 0
