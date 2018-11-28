@@ -1,1 +1,37 @@
+---
+- hosts: all
+  vars:
+    vcenter_server: "168.1.107.242"
+    vcenter_user: "administrator@vsphere.local"
+    vcenter_pass: "RH[}3y5p"
+    esxi_username: "root"
+    esxi_password: "T585Qavq"
+    esxi_hostname: "esx4.demo.com"
 
+
+  tasks:
+    - name: Add a VMware vSwitch0 to a specific host system
+      vmware_vswitch:
+       #  hostname: "{{ vcenter_server }}"
+        username: "{{ esxi_username }}"
+        password: "{{ esxi_password }}"
+        esxi_hostname: "{{ esxi_hostname }}"
+        switch_name: vswitch0
+        nic_name: vmnic0
+        validate_certs: no
+        mtu: 9000
+      delegate_to: localhost
+
+    - name: Add a VMware vSwitch1 to a specific host system
+       vmware_vswitch:
+         hostname: "{{ vcenter_server }}"
+         username: "{{ esxi_username }}"
+         password: "{{ esxi_password }}"
+         esxi_hostname: "{{ esxi_hostname }}"
+         switch_name: vswitch1
+         nic_name: vmnic1
+         validate_certs: no
+         mtu: 9000
+       delegate_to: localhost
+
+ 
