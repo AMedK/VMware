@@ -57,6 +57,19 @@
         portgroup_name: VM-Private
         vlan_id: 0
       delegate_to: localhost
+      
+    - name: Add Private Network VM Portgroup
+      vmware_portgroup:
+        hostname: "{{ esxi_hostname }}"
+        username: "{{ esxi_username }}"
+        password: "{{ esxi_password }}"
+        esxi_hostname: "{{ esxi_hostname }}"
+        hosts: "{{ esxi_hostname }}"
+        switch_name: vSwitch0
+        validate_certs: no
+        portgroup_name: VMkernel
+        vlan_id: 0
+      delegate_to: localhost
 
     - name: Add Management vmkernel port using DHCP network type
       vmware_vmkernel:
@@ -68,6 +81,10 @@
         vswitch_name: vSwitch0
         validate_certs: no
         portgroup_name: VMkernel
+        enable_vmotion: yes
+        enable_vsan: yes
+        enable_mgmt: yes
+        enable_ft: yes
         vlan_id: 0
         state: present
         network:
