@@ -34,4 +34,48 @@
          mtu: 9000
        delegate_to: localhost
 
+    - name: Add Management Network VM Portgroup
+      vmware_portgroup:
+        hostname: "{{ esxi_hostname }}"
+        username: "{{ esxi_username }}"
+        password: "{{ esxi_password }}"
+        switch_name: vswitch0
+        portgroup_name: Management Network
+        vlan_id: 0
+
+    - name: Add Private Network VM Portgroup
+      vmware_portgroup:
+        hostname: "{{ esxi_hostname }}"
+        username: "{{ esxi_username }}"
+        password: "{{ esxi_password }}"
+        switch_name: vswitch0
+        portgroup_name: VM-Private
+        vlan_id: 0
+
+    - name: Add Management vmkernel port using DHCP network type
+      vmware_vmkernel:
+        hostname: "{{ esxi_hostname }}"
+        username: "{{ esxi_username }}"
+        password: "{{ esxi_password }}"
+        vswitch_name: vSwitch0
+        portgroup_name: VMkernel
+        vlan_id: 0
+        state: present
+        network:
+          type: 'dhcp'
+        enable_mgmt: True
+  
+    - name: Add VM-Network VM Portgroup
+      vmware_portgroup:
+        hostname: "{{ esxi_hostname }}"
+        username: "{{ esxi_username }}"
+        password: "{{ esxi_password }}"
+        switch_name: vswitch1
+        portgroup_name: Management Network
+        vlan_id: 0
+
+
+
+    
+
  
