@@ -12,7 +12,7 @@
   tasks:
     - name: Add a VMware vSwitch0 to a specific host system
       vmware_vswitch:
-       #  hostname: "{{ vcenter_server }}"
+        hostname: "{{ vcenter_server }}"
         username: "{{ esxi_username }}"
         password: "{{ esxi_password }}"
         esxi_hostname: "{{ esxi_hostname }}"
