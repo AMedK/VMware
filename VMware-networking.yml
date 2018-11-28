@@ -100,7 +100,7 @@
         esxi_hostname: "{{ esxi_hostname }}"
         switch_name: vSwitch1
         validate_certs: no
-        portgroup_name: Management Network
+        portgroup_name: VM-Public
         vlan_id: 0
       delegate_to: localhost
 
