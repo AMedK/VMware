@@ -24,15 +24,15 @@
 
     - name: Add a VMware vSwitch1 to a specific host system
       vmware_vswitch:
-         hostname: "{{ vcenter_server }}"
-         username: "{{ esxi_username }}"
-         password: "{{ esxi_password }}"
-         esxi_hostname: "{{ esxi_hostname }}"
-         switch_name: vswitch1
-         nic_name: vmnic1
-         validate_certs: no
-         mtu: 9000
-       delegate_to: localhost
+        hostname: "{{ vcenter_server }}"
+        username: "{{ esxi_username }}"
+        password: "{{ esxi_password }}"
+        esxi_hostname: "{{ esxi_hostname }}"
+        switch_name: vswitch1
+        nic_name: vmnic1
+        validate_certs: no
+        mtu: 9000
+      delegate_to: localhost
 
     - name: Add Management Network VM Portgroup
       vmware_portgroup:
