@@ -23,6 +23,7 @@
   #    delegate_to: localhost
 
     - name: Add a VMware vSwitch1 to a specific host system
+      delegate_to: localhost
       vmware_vswitch:
         hostname: "{{ esxi_hostname }}"
         username: "{{ esxi_username }}"
@@ -32,7 +33,7 @@
         nic_name: vmnic1
         validate_certs: no
         mtu: 9000
-      delegate_to: localhost
+      # delegate_to: localhost
 
     - name: Add Management Network VM Portgroup
       vmware_portgroup:
