@@ -23,7 +23,7 @@
       delegate_to: localhost
 
     - name: Add a VMware vSwitch1 to a specific host system
-       vmware_vswitch:
+      vmware_vswitch:
          hostname: "{{ vcenter_server }}"
          username: "{{ esxi_username }}"
          password: "{{ esxi_password }}"
