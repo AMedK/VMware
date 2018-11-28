@@ -52,6 +52,7 @@
         password: "{{ esxi_password }}"
         hosts: "{{ esxi_hostname }}"
         switch_name: vswitch0
+        validate_certs: no
         portgroup_name: VM-Private
         vlan_id: 0
       delegate_to: localhost
@@ -63,6 +64,7 @@
         password: "{{ esxi_password }}"
         hosts: "{{ esxi_hostname }}"
         vswitch_name: vSwitch0
+        validate_certs: no
         portgroup_name: VMkernel
         vlan_id: 0
         state: present
@@ -78,6 +80,7 @@
         password: "{{ esxi_password }}"
         hosts: "{{ esxi_hostname }}"
         switch_name: vswitch1
+        validate_certs: no
         portgroup_name: Management Network
         vlan_id: 0
       delegate_to: localhost
