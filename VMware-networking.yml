@@ -50,6 +50,7 @@
         hostname: "{{ esxi_hostname }}"
         username: "{{ esxi_username }}"
         password: "{{ esxi_password }}"
+        esxi_hostname: "{{ esxi_hostname }}"
         hosts: "{{ esxi_hostname }}"
         switch_name: vswitch0
         validate_certs: no
