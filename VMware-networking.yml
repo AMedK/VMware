@@ -39,6 +39,7 @@
         hostname: "{{ esxi_hostname }}"
         username: "{{ esxi_username }}"
         password: "{{ esxi_password }}"
+        hosts: "{{ esxi_hostname }}"
         switch_name: vswitch0
         portgroup_name: Management Network
         vlan_id: 0
@@ -48,6 +49,7 @@
         hostname: "{{ esxi_hostname }}"
         username: "{{ esxi_username }}"
         password: "{{ esxi_password }}"
+        hosts: "{{ esxi_hostname }}"
         switch_name: vswitch0
         portgroup_name: VM-Private
         vlan_id: 0
@@ -57,6 +59,7 @@
         hostname: "{{ esxi_hostname }}"
         username: "{{ esxi_username }}"
         password: "{{ esxi_password }}"
+        hosts: "{{ esxi_hostname }}"
         vswitch_name: vSwitch0
         portgroup_name: VMkernel
         vlan_id: 0
@@ -70,6 +73,7 @@
         hostname: "{{ esxi_hostname }}"
         username: "{{ esxi_username }}"
         password: "{{ esxi_password }}"
+        hosts: "{{ esxi_hostname }}"
         switch_name: vswitch1
         portgroup_name: Management Network
         vlan_id: 0
