@@ -79,6 +79,7 @@
         hostname: "{{ esxi_hostname }}"
         username: "{{ esxi_username }}"
         password: "{{ esxi_password }}"
+        esxi_hostname: "{{ esxi_hostname }}"
         switch_name: vSwitch1
         validate_certs: no
         portgroup_name: Management Network
