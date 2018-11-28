@@ -63,7 +63,7 @@
         hostname: "{{ esxi_hostname }}"
         username: "{{ esxi_username }}"
         password: "{{ esxi_password }}"
-        hosts: "{{ esxi_hostname }}"
+    #    hosts: "{{ esxi_hostname }}"
         vswitch_name: vSwitch0
         validate_certs: no
         portgroup_name: VMkernel
