@@ -27,8 +27,8 @@
     - name: Configure CHAP Authentication for Iscsi
       shell: "esxcli iscsi adapter auth chap set --direction=uni --chap_username={{ iscsi_user_name }} --chap_password={{ iscsi_password }} --adapter=vmhba64"
       register: chap_register
-    - debug:
-        msg: "{{ chap_register }}"
+   # - debug:
+   #     msg: "{{ chap_register }}"
         
         
     - name: Iscsi discover
