@@ -8,7 +8,7 @@
       shell: "esxcli iscsi software set --enabled=true"
       register: iscsi_register
     - debug:
-        msg: "{{ iscsi_enable }}"
+        msg: "{{ iscsi_register }}"
     
       
     - name: add iqn from Iscsi storage to the ESX host
