@@ -2,7 +2,7 @@
 - hosts: all
     
   tasks: 
-    - include_vars: "update_esxi_defaults.yaml"
+   # - include_vars: "update_esxi_defaults.yaml"
   
     - name: enable software iscsi adapter
       shell: "esxcli iscsi software set --enabled=true"
