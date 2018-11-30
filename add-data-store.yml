@@ -25,7 +25,7 @@
         msg: "{{ iscsi_tgt_register }}"
       
     - name: Configure CHAP Authentication for Iscsi
-      shell: "esxcli iscsi adapter auth chap set --direction=uni --authname='{{ iscsi_user_name }}' --secret='{{ iscsi_password }}' --level=chapRequired --adapter=vmhba64"
+      shell: "esxcli iscsi adapter auth chap set --direction=uni --authname='{{ iscsi_user_name }}' --secret='{{ iscsi_password }}' --level=required --adapter=vmhba64"
    #   register: chap_register
    # - debug:
    #     msg: "{{ chap_register }}"
