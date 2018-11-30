@@ -37,12 +37,24 @@
     - debug:
         msg: "{{ discover_register }}"
         
+    # before rescan
+    - name: before rescan
+      pause:
+        seconds: 20
+      when: will_reboot
+        
             
     - name: Rescan ESX Storage
       shell: "esxcli storage core adapter rescan --adapter=vmhba64"
       register: rescan_register
     - debug:
         msg: "{{ rescan_register }}"
+        
+    # before rescan
+    - name: before rescan
+      pause:
+        seconds: 20
+      when: will_reboot
         
     - name: search for new VMFS datastores
       shell: "vmkfstools -V"
