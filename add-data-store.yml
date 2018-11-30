@@ -43,5 +43,9 @@
       register: rescan_register
     - debug:
         msg: "{{ rescan_register }}"
+        
+    - name: search for new VMFS datastores
+      shell: "vmkfstools -V"
+      
       
     
