@@ -1,0 +1,47 @@
+---
+- hosts: all
+    
+  tasks: 
+    - include_vars: "update_esxi_defaults.yaml"
+  
+    - name: enable software iscsi adapter
+      shell: "esxcli iscsi software set --enabled=true"
+      register: iscsi_register
+    - debug:
+        msg: "{{ iscsi_enable }}"
+    
+      
+    - name: add iqn from Iscsi storage to the ESX host
+      shell: "esxcli iscsi adapter set -A vmhba64 -n {{ host_iqn_from_softlayer }}"
+      register: add_iqn_register
+    - debug:
+        msg: "{{ add_iqn_register }}"
+      
+      
+    - name: add iscsi targets
+      shell: "esxcli iscsi adapter discovery sendtarget add -A vmhba64 -a {{ Target_address }}:3260"
+      register: iscsi_tgt_register
+    - debug:
+        msg: "{{ iscsi_tgt_register }}"
+      
+    - name: Configure CHAP Authentication for Iscsi
+      shell: "esxcli iscsi adapter auth chap set --direction=uni --chap_username={{ iscsi_user_name }} --chap_password={{ iscsi_password }} --adapter=vmhba64"
+      register: chap_register
+    - debug:
+        msg: "{{ chap_register }}"
+        
+        
+    - name: Iscsi discover
+      shell: "esxcli iscsi adapter discovery rediscover -A vmhba64"
+      register: discover_register
+    - debug:
+        msg: "{{ discover_register }}"
+        
+            
+    - name: Rescan ESX Storage
+      shell: "esxcli storage core adapter rescan --adapter=vmhba64"
+      register: rescan_register
+    - debug:
+        msg: "{{ rescan_register }}"
+      
+    
