@@ -1,0 +1,19 @@
+---
+- hosts: localhost
+
+  tasks:
+    - name: Run PowerShell Core script
+      command: /usr/bin/pwsh /var/lib/awx/projects/PowerShell/shutdown_uat.ps1 -tag "{{ tag_name }}"
+      with_items: "{{ tag_name }}"
+      ignore_errors: yes
+      changed_when: false
+      register: powershell_output
+
+    - name: Current configuration
+      command: /usr/bin/pwsh /var/lib/awx/projects/PowerShell/current_stat.ps1 -tag "{{ tag_name }}"
+      with_items: "{{ tag_name }}"
+      register: current_output
+
+    - debug:
+       # msg: "{{ current_output }}"
+        var: "current_output.stdout.split('\n')"
