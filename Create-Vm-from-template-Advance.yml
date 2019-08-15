@@ -17,16 +17,44 @@
         datacenter: "{{ datacenter_2 }}"
         networks:
           - name: "{{ network }}"
-            type: dhcp
+            type: static
+            device_type: e1000e
+            ip: 10.118.77.112
+            netmask: 255.255.255.192
+          - name: "{{ network_2 }}"
+            type: static
+            device_type: e1000e
+            ip: 168.1.95.182
+            netmask: 255.255.255.240
+            gateway: 168.1.95.177  
             
-  
         cluster: "{{ cluster_2 }}"
         customization:
           dns_servers: "{{ dns_server }}"
         wait_for_ip_address: yes
       register: vm_result
 
-- name: Assert that VM is created
-  assert:
-    that:
-      - "vm_result.changed"
+    - name: Assert that VM is created
+      assert:
+      that:
+        - "vm_result.changed"
+        
+    - name: IP address info
+      debug:
+        msg: "{{ vm_result.instance.hw_eth0.ipaddresses[0] }} {{ vm_name }}"  
+
+    - name: Enable WinRM to be used with Ansible 
+      local_action:
+        module: vmware_vm_shell
+        hostname: "{{ vcenter_server }}"
+        username: Administrator@vsphere.local
+        password: "{{ vsphere_password }}" 
+        vm_username: Administrator
+        vm_password: "{{ vm_password }}"
+        vm_id: "{{ vm_name }}"
+        vm_shell: 'c:\windows\system32\windowspowershell\v1.0\powershell.exe'
+        vm_shell_args: "{{ item }}" 
+      with_items:
+        - '-command "& {Set-ExecutionPolicy Unrestricted}"'
+        - '-command "& {Invoke-Expression ((New-Object System.Net.Webclient).DownloadString(\"https://raw.githubusercontent.com/ansible/ansible/devel/examples/scripts/ConfigureRemotingForAnsible.ps1\"))}"'
+        - '-command "& {Set-ExecutionPolicy RemoteSigned}"'
