@@ -20,7 +20,7 @@
 - datastore: Demo-Datastore-1
 - network: VM-Private
 - network_2: VM-Public
-- template_name: AD-2016
+- template_name_win: AD-2016
 - folder: /vm
 - dns_server: 8.8.8.8
 - vm_name: win-pro-testing
