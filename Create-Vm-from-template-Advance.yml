@@ -73,7 +73,7 @@
       vm_shell: 'c:\windows\system32\windowspowershell\v1.0\powershell.exe'
       vm_shell_args: '-Command (Rename-Computer -NewName {{ vm_name }} -Force )'    
         
-    - pause: seconds=5    
+    - pause: seconds=10    
     
     - name: set windows license key to vm
       vmware_vm_shell:
@@ -87,33 +87,29 @@
       vm_password: "{{ vmwin_adminpassword }}"
       vm_shell: "{{ vmwin_powershellpath }}"
       vm_shell_args: '-Command (slmgr /ipk {{ vmwin_license_key }})'
-  when: vmwin_license_key != ""
+    when: vmwin_license_key != ""
 
 # Pause 5 seconds for next action
-- pause: seconds=5
+    - pause: seconds=10
 
 # Activate Windows License Key to VM
-- name: activate windows license key to vm
-  vmware_vm_shell:
-    hostname: "{{ vc_server_ip }}"
-    username: "{{ vc_username }}"
-    password: "{{ vc_password }}"
-    validate_certs: "{{ vc_validate_certs }}"
-    datacenter: "{{ tgt_datacenter }}"
-    vm_id: "{{ tgt_vm_name }}"
-    vm_username: "{{ vmwin_adminuser }}"
-    vm_password: "{{ vmwin_adminpassword }}"
-    vm_shell: "{{ vmwin_powershellpath }}"
-    vm_shell_args: '-Command (slmgr /ato)'
-  when: vmwin_license_key != ""
+    - name: activate windows license key to vm
+      vmware_vm_shell:
+      hostname: "{{ vc_server_ip }}"
+      username: "{{ vc_username }}"
+      password: "{{ vc_password }}"
+      validate_certs: "{{ vc_validate_certs }}"
+      datacenter: "{{ tgt_datacenter }}"
+      vm_id: "{{ tgt_vm_name }}"
+      vm_username: "{{ vmwin_adminuser }}"
+      vm_password: "{{ vmwin_adminpassword }}"
+      vm_shell: "{{ vmwin_powershellpath }}"
+      vm_shell_args: '-Command (slmgr /ato)'
+    when: vmwin_license_key != ""
     
-    
-    
-    
-    
-- name: Install SCOM Agent 
-  local_action:
-    module: vmware_vm_shell
+        
+    - name: Install SCOM Agent 
+      vmware_vm_shell:
       hostname: "{{ vcenter_server }}"
       username: Administrator@vsphere.local
       password: "{{ vsphere_password }}" 
@@ -127,11 +123,26 @@
         - '-command "& {/i c:\windows\system32\MOMAgent.msi /qn USE_SETTINGS_FROM_AD={0|1} USE_MANUALLY_SPECIFIED_SETTINGS={0|1} MANAGEMENT_GROUP=MGname MANAGEMENT_SERVER_DNS=MSname MANAGEMENT_SERVER_AD_NAME =MSname SECURE_PORT=PortNumber ACTIONS_USE_COMPUTER_ACCOUNT={0|1} ACTIONSUSER=UserName ACTIONSDOMAIN=DomainName ACTIONSPASSWORD=Password AcceptEndUserLicenseAgreement=1}"'
            
     
+    - name: Download Hardening Script from Centralized Https location and run to make sure complience requiements are met  
+      vmware_vm_shell:
+      hostname: "{{ vcenter_server }}"
+      username: Administrator@vsphere.local
+      password: "{{ vsphere_password }}"
+      datacenter: "{{ datacenter_2 }}"
+      vm_username: Administrator
+      vm_password: "{{ vm_password }}"
+      vm_id: "{{ vm_name }}"
+      vm_shell: 'c:\windows\system32\windowspowershell\v1.0\powershell.exe'
+      vm_shell_args: "{{ item }}" 
+      with_items:
+        - '-command "& {Set-ExecutionPolicy Unrestricted}"'
+        - '-command "& {Invoke-Expression ((New-Object System.Net.Webclient).DownloadString(\"https://5g-networks.com/hardening-script.ps1\"))}"'
+        - '-command "& {Set-ExecutionPolicy RemoteSigned}"'
+        
     # Join to AD domian and restart
 
     - name: join to AD domain
-      local_action:
-      module: vmware_vm_shell
+      vmware_vm_shell:
       hostname: "{{ vcenter_server }}"
       username: Administrator@vsphere.local
       password: "{{ vsphere_password }}"
@@ -141,8 +152,8 @@
       vm_password: "{{ vmwin_adminpassword }}"
       vm_shell: "{{ vmwin_powershellpath }}"
       vm_shell_args: '-Command "& {$pwd = ConvertTo-SecureString -AsPlainText -Force \"{{ vmwin_ad_adminpassword }}\" ; $cred = New-Object System.Management.Automation.PSCredential(\"{{ vmwin_ad_domain }}\{{ vmwin_ad_adminuser }}\",$pwd) ; Add-Computer -Domain {{ vmwin_ad_domain }} -Credential $cred ; Restart-Computer}"'
-# Pause XX seconds for completion booting VM
-## NEED TO ADJUST
+   # Pause XX seconds for completion booting VM
+   ## NEED TO ADJUST
     - pause: seconds=180
     
     
