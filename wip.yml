@@ -37,14 +37,14 @@
       
     - name: change computer name to target vm name
       vmware_vm_shell:
-      hostname: "{{ vcenter_server }}"
-      username: Administrator@vsphere.local
-      password: "{{ vcenter_pass }}"
-      datacenter: "{{ datacenter_2 }}"
-      vm_id: "{{ vm_name }}"
-      vm_username: "{{ vmwin_adminuser }}"
-      vm_password: "{{ vmwin_adminpassword }}"
-      vm_shell: 'c:\windows\system32\windowspowershell\v1.0\powershell.exe'
-      vm_shell_args: '-Command (Rename-Computer -NewName {{ vm_name }} -Force )'    
+        hostname: "{{ vcenter_server }}"
+        username: Administrator@vsphere.local
+        password: "{{ vcenter_pass }}"
+        datacenter: "{{ datacenter_2 }}"
+        vm_id: "{{ vm_name }}"
+        vm_username: "{{ vmwin_adminuser }}"
+        vm_password: "{{ vmwin_adminpassword }}"
+        vm_shell: 'c:\windows\system32\windowspowershell\v1.0\powershell.exe'
+        vm_shell_args: '-Command (Rename-Computer -NewName {{ vm_name }} -Force )'    
       
       
