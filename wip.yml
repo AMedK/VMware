@@ -8,7 +8,7 @@
     - name: Clone a virtual machine {{ vm_name }} from existing template {{ template_name }}
       vmware_guest:
         name: "{{ vm_name }}"
-        template: "{{ template_name }}"
+        template: "{{ template_name_win }}"
         hostname: "{{ vcenter_server }}"
         username: "{{ vcenter_user }}"
         password: "{{ vcenter_pass }}"
@@ -20,7 +20,7 @@
             start_connected: True
             type: static
             device_type: e1000e
-            ip: 10.118.77.112
+            ip: 10.118.77.110
             netmask: 255.255.255.192
           - name: "{{ network_2 }}"
             start_connected: True
@@ -39,7 +39,7 @@
       vmware_vm_shell:
       hostname: "{{ vcenter_server }}"
       username: Administrator@vsphere.local
-      password: "{{ vsphere_password }}"
+      password: "{{ vcenter_pass }}"
       datacenter: "{{ datacenter_2 }}"
       vm_id: "{{ vm_name }}"
       vm_username: "{{ vmwin_adminuser }}"
