@@ -20,7 +20,7 @@
             start_connected: True
             type: static
             device_type: e1000e
-            ip: 10.118.77.110
+            ip: 10.118.77.113
             netmask: 255.255.255.192
           - name: "{{ network_2 }}"
             start_connected: True
