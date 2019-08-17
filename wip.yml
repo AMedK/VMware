@@ -41,7 +41,7 @@
         wait_for_ip_address: yes
       register: vm_result
       
-    - pause: seconds=180
+    - pause: seconds=120
       
     - name: change computer name to target vm name
       vmware_vm_shell:
@@ -69,9 +69,9 @@
         vm_password: "{{ vmwin_adminpassword }}"
         vm_shell: 'c:\windows\system32\windowspowershell\v1.0\powershell.exe'
         vm_shell_args: "{{ item }}"
-        with_items:
-          - '-command "& {route -p ADD 10.0.0.0 MASK 255.0.0.0 10.118.77.65}"'
-          - '-command "& {route -p ADD 0.0.0.0 MASK 0.0.0.0 168.1.95.177}"'
+      with_items:
+        - '-command "& {route -p ADD 10.0.0.0 MASK 255.0.0.0 10.118.77.65}"'
+        - '-command "& {route -p ADD 0.0.0.0 MASK 0.0.0.0 168.1.95.177}"'
 
     
     - name: Enable WinRM to be used with Ansible 
