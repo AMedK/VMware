@@ -20,7 +20,7 @@
 - datastore: Demo-Datastore-1
 - network: VM-Private
 - network_2: VM-Public
-- template_name_win: Win-Template
+- template_name_win: W2k16-Template
 - folder: /vm
 - dns_server: 8.8.8.8
 - vm_name: win-pro-testing
