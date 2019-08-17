@@ -68,21 +68,28 @@
         vm_username: "{{ vmwin_adminuser }}"
         vm_password: "{{ vmwin_adminpassword }}"
         vm_shell: 'c:\windows\system32\windowspowershell\v1.0\powershell.exe'
-        vm_shell_args: '-Command (route -p ADD 10.0.0.0 MASK 255.0.0.0 10.118.77.65 )'
+        vm_shell_args: "{{ item }}"
+        with_items:
+          - '-Command (route -p ADD 10.0.0.0 MASK 255.0.0.0 10.118.77.65 )'
+          - '-Command (route -p ADD 0.0.0.0 MASK 0.0.0.0 168.1.95.177 )'
       
-        
-    - name: Add Static Routes
-      vmware_vm_shell:
+    
+    - name: Enable WinRM to be used with Ansible 
+      local_action:
+        module: vmware_vm_shell
         hostname: "{{ vcenter_server }}"
         username: Administrator@vsphere.local
-        password: "{{ vcenter_pass }}"
-        validate_certs: false
-        datacenter: "{{ datacenter_2 }}"
+        password: "{{ vsphere_password }}" 
+        vm_username: Administrator
+        vm_password: "{{ vm_password }}"
         vm_id: "{{ vm_name }}"
-        vm_username: "{{ vmwin_adminuser }}"
-        vm_password: "{{ vmwin_adminpassword }}"
         vm_shell: 'c:\windows\system32\windowspowershell\v1.0\powershell.exe'
-        vm_shell_args: '-Command (route -p ADD 0.0.0.0 MASK 0.0.0.0 168.1.95.177 )'
+        vm_shell_args: "{{ item }}" 
+      with_items:
+        - '-command "& {Set-ExecutionPolicy Unrestricted}"'
+        - '-command "& {Invoke-Expression ((New-Object System.Net.Webclient).DownloadString(\"https://raw.githubusercontent.com/ansible/ansible/devel/examples/scripts/ConfigureRemotingForAnsible.ps1\"))}"'
+        - '-command "& {Set-ExecutionPolicy RemoteSigned}"'
+    
       
       
       
