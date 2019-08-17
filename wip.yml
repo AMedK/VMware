@@ -71,15 +71,15 @@
         vm_shell_args: "{{ item }}"
       with_items:
         - '-command "& {route -p ADD 10.0.0.0 MASK 255.0.0.0 10.118.77.65}"'
-        - '-command "& {route -p ADD 0.0.0.0 MASK 0.0.0.0 168.1.95.177}"'
+    #    - '-command "& {route -p ADD 0.0.0.0 MASK 0.0.0.0 168.1.95.177}"'
 
     
     - name: Enable WinRM to be used with Ansible 
-      local_action:
-        module: vmware_vm_shell
+      vmware_vm_shell:
         hostname: "{{ vcenter_server }}"
         username: Administrator@vsphere.local
-        password: "{{ vsphere_password }}" 
+        password: "{{ vsphere_password }}"
+        validate_certs: false
         vm_username: Administrator
         vm_password: "{{ vmwin_adminpassword }}"
         vm_id: "{{ vm_name }}"
