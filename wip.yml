@@ -41,7 +41,7 @@
         wait_for_ip_address: yes
       register: vm_result
       
-    - pause: seconds=120
+    - pause: seconds=180
       
     - name: change computer name to target vm name
       vmware_vm_shell:
