@@ -50,5 +50,23 @@
         vm_password: "{{ vmwin_adminpassword }}"
         vm_shell: 'c:\windows\system32\windowspowershell\v1.0\powershell.exe'
         vm_shell_args: '-Command (Rename-Computer -NewName {{ vm_name }} -Force )'    
+        
+    
+    - name: Add Static Routes
+      vmware_vm_shell:
+        hostname: "{{ vcenter_server }}"
+        username: Administrator@vsphere.local
+        password: "{{ vcenter_pass }}"
+        validate_certs: false
+        datacenter: "{{ datacenter_2 }}"
+        vm_id: "{{ vm_name }}"
+        vm_username: "{{ vmwin_adminuser }}"
+        vm_password: "{{ vmwin_adminpassword }}"
+        vm_shell: 'c:\windows\system32\windowspowershell\v1.0\powershell.exe'
+        vm_shell_args: "{{ item }}"
+      with_items:
+        - '-command "& {route -p ADD 10.0.0.0 MASK 255.0.0.0 10.118.77.65}"'
+        - '-command "& {route -p ADD 0.0.0.0 MASK 0.0.0.0 168.1.95.177}"'
+        
       
       
