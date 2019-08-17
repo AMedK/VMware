@@ -25,8 +25,8 @@
 - dns_server: 8.8.8.8
 - vm_name: win-pro-testing
 - vmwin_adminuser: Administrator
-#- vmwin_adminpassword: RedHat1!
-- vmwin_adminpassword: ""
+- vmwin_adminpassword: RedHat1!
+
 
 # Snapshot settings
 - snapshot: Ansible_snapshot
