@@ -26,7 +26,7 @@
 - vm_name: win-pro-testing
 - vmwin_adminuser: Administrator
 #- vmwin_adminpassword: RedHat1!
-- vmwin_adminpassword: 
+- vmwin_adminpassword: ""
 
 # Snapshot settings
 - snapshot: Ansible_snapshot
