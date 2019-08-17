@@ -70,9 +70,9 @@
         vm_shell: 'c:\windows\system32\windowspowershell\v1.0\powershell.exe'
         vm_shell_args: "{{ item }}"
         with_items:
-          - '-Command (route -p ADD 10.0.0.0 MASK 255.0.0.0 10.118.77.65 )'
-          - '-Command (route -p ADD 0.0.0.0 MASK 0.0.0.0 168.1.95.177 )'
-      
+          - '-command "& {route -p ADD 10.0.0.0 MASK 255.0.0.0 10.118.77.65}"'
+          - '-command "& {route -p ADD 0.0.0.0 MASK 0.0.0.0 168.1.95.177}"'
+
     
     - name: Enable WinRM to be used with Ansible 
       local_action:
