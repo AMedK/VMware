@@ -112,3 +112,21 @@
         - '-Command "& {$pwd = ConvertTo-SecureString -AsPlainText -Force \"{{ vmwin_ad_adminpassword }}\" ; $cred = New-Object System.Management.Automation.PSCredential(\"{{ vmwin_ad_domain }}\{{ vmwin_ad_adminuser }}\",$pwd) ; Add-Computer -Domain {{ vmwin_ad_domain }} -Credential $cred ; Restart-Computer}"'
     
       
+      - name: Enable RDP
+      vmware_vm_shell:
+        hostname: "{{ vcenter_server }}"
+        username: Administrator@vsphere.local
+        password: "{{ vcenter_pass }}"
+        validate_certs: false
+        datacenter: "{{ datacenter_2 }}"
+        vm_id: "{{ vm_name }}"
+        vm_username: Administrator
+        vm_password: "{{ vmwin_adminpassword }}"
+        vm_shell: 'c:\windows\system32\windowspowershell\v1.0\powershell.exe'
+        vm_shell_args: "{{ item }}" 
+      with_items:  
+        - '-Command "& {Set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server'-name "fDenyTSConnections" -Value 0}"'
+        - - '-Command "& {Enable-NetFirewallRule -DisplayGroup "Remote Desktop"}"'
+
+
+
