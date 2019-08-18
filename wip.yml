@@ -15,7 +15,7 @@
         validate_certs: no 
         folder: "{{ folder }}"
         datacenter: "{{ datacenter_2 }}"
-        convert: thin
+   #     convert: thin
         networks:
           - name: "{{ network }}"
             start_connected: True
