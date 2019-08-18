@@ -98,7 +98,7 @@
     
     - name: join to AD domain
       vmware_vm_shell:
-      hostname: "{{ vcenter_server }}"
+        hostname: "{{ vcenter_server }}"
         username: Administrator@vsphere.local
         password: "{{ vcenter_pass }}"
         validate_certs: false
