@@ -26,6 +26,9 @@
 - vm_name: win-pro-testing
 - vmwin_adminuser: Administrator
 - vmwin_adminpassword: RedHat1!
+- vmwin_ad_adminpassword: RedHat1!
+- vmwin_ad_domain: rhipe.com
+- vmwin_ad_adminuser: Administrator
 
 
 # Snapshot settings
