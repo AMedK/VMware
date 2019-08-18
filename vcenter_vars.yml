@@ -29,7 +29,9 @@
 - vmwin_ad_adminpassword: RedHat1!
 - vmwin_ad_domain: rhipe.com
 - vmwin_ad_adminuser: Administrator
-
+- vm_memory_size: 4096
+- vm_number_of_cpu: 2
+- vm_storage_size: 20
 
 # Snapshot settings
 - snapshot: Ansible_snapshot
