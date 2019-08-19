@@ -12,6 +12,7 @@
         hostname: "{{ vcenter_server }}"
         username: "{{ vcenter_user }}"
         password: "{{ vcenter_pass }}"
+        state: present
         validate_certs: no 
         folder: "{{ folder }}"
         datacenter: "{{ datacenter_2 }}"
