@@ -36,8 +36,8 @@
             type: thin
             autoselect_datastore: True
         hardware:
-          - memory_mb: "{{ vm_memory_size }}"
-            num_cpus: "{{ vm_number_of_cpu }}"
+          memory_mb: "{{ vm_memory_size }}"
+          num_cpus: "{{ vm_number_of_cpu }}"
         customization:
           dns_servers: 
           - 10.118.77.68
