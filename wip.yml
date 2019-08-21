@@ -114,7 +114,7 @@
         validate_certs: false
         datacenter: "{{ datacenter_2 }}"
         vm_id: "{{ vm_name }}"
-        wait_for_process: True
+      #  wait_for_process: True
         vm_username: Administrator
         vm_password: "{{ vmwin_adminpassword }}"
         vm_shell: 'c:\windows\system32\windowspowershell\v1.0\powershell.exe'
