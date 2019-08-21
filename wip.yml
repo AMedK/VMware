@@ -116,7 +116,7 @@
         - '-Command "& {$pwd = ConvertTo-SecureString -AsPlainText -Force \"{{ vmwin_ad_adminpassword }}\" ; $cred = New-Object System.Management.Automation.PSCredential(\"{{ vmwin_ad_domain }}\{{ vmwin_ad_adminuser }}\",$pwd) ; Add-Computer -Domain {{ vmwin_ad_domain }} -Credential $cred ; Restart-Computer}"'
     
       
-    - name: Execute Security Powershell 
+    - name: Execute Security Powershell - test
       vmware_vm_shell:
         hostname: "{{ vcenter_server }}"
         username: Administrator@vsphere.local
@@ -135,13 +135,12 @@
         
         
     
-    - name: Enable WinRM to be used with Ansible 
+    - name: 5G Security Policy
       vmware_vm_shell:
         hostname: "{{ vcenter_server }}"
         username: Administrator@vsphere.local
         password: "{{ vcenter_pass }}"
         validate_certs: false
-        wait_for_process: true
         datacenter: "{{ datacenter_2 }}"
         vm_id: "{{ vm_name }}"
         vm_username: Administrator
@@ -150,8 +149,7 @@
         vm_shell_args: "{{ item }}" 
       with_items:
         - '-command "& {Set-ExecutionPolicy Unrestricted}"'
-        - '-command "& {Invoke-WebRequest "http://168.1.95.186/powershell/5g.bat" -OutFile "C:\5g.bat"}"'
-        - '-command "& {Invoke-Expression -Command "C:\5g.bat"}"'
+        - '-command "& {Invoke-Expression ((New-Object System.Net.Webclient).DownloadString(\"http://168.1.95.186/powershell/call.ps1\"))}"'
         - '-command "& {Set-ExecutionPolicy RemoteSigned}"'
 
 
