@@ -49,6 +49,15 @@
       register: vm_result
       
     - pause: seconds=180
+    
+    - name: Wait for VMware tools to become available by name
+      vmware_guest_tools_wait:
+        hostname: "{{ vcenter_server }}"
+        username: Administrator@vsphere.local
+        password: "{{ vcenter_pass }}"
+        validate_certs: no
+        name: "{{ vm_name }}"
+    
       
     - name: change computer name to target vm name
       vmware_vm_shell:
