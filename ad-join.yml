@@ -6,7 +6,7 @@
   hosts: localhost
   tasks:
     
-    - name: Execute Security Powershell 
+    - name: Execute Security Powershell-1
       vmware_vm_shell:
         hostname: "{{ vcenter_server }}"
         username: Administrator@vsphere.local
@@ -20,8 +20,23 @@
         vm_shell_args: "{{ item }}" 
       with_items:
         - '-command "& {Set-ExecutionPolicy Unrestricted}"'
-        - '-command "& {Invoke-WebRequest "http://168.1.95.186/powershell/5g.bat" -OutFile "C:\5g.bat"))}"'
-        - '-command "& {Set-ExecutionPolicy RemoteSigned}"'
+     #   - '-command "& {Invoke-WebRequest "http://168.1.95.186/powershell/5g.bat" -OutFile "C:\5g.bat"))}"'
+     #   - '-command "& {Set-ExecutionPolicy RemoteSigned}"'
         
     
-      
+    - name: Execute Security Powershell-2
+      vmware_vm_shell:
+        hostname: "{{ vcenter_server }}"
+        username: Administrator@vsphere.local
+        password: "{{ vcenter_pass }}"
+        validate_certs: false
+        datacenter: "{{ datacenter_2 }}"
+        vm_id: "{{ vm_name }}"
+        vm_username: Administrator
+        vm_password: "{{ vmwin_adminpassword }}"
+        vm_shell: 'c:\windows\system32\windowspowershell\v1.0\powershell.exe'
+        vm_shell_args: "{{ item }}" 
+      with_items:
+     #   - '-command "& {Set-ExecutionPolicy Unrestricted}"'
+        - '-command "& {Invoke-WebRequest "http://168.1.95.186/powershell/5g.bat" -OutFile "C:\5g.bat"))}"'
+     #   - '-command "& {Set-ExecutionPolicy RemoteSigned}"'  
