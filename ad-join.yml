@@ -20,8 +20,8 @@
         vm_shell: 'c:\windows\system32\windowspowershell\v1.0\powershell.exe'
         vm_shell_args: "{{ item }}" 
       with_items:  
-        - '-Command "& { Invoke-WebRequest "http://168.1.95.186/powershell/5g.bat" -OutFile "C:\Users\Administrator\5g.bat"}"'
-        - '-Command "& { start-process "cmd.exe" "/c" "C:\Users\Administrator\5g.bat"}"'
+     #   - '-Command "& { Invoke-WebRequest "http://168.1.95.186/powershell/5g.bat" -OutFile "C:\Users\Administrator\5g.bat"}"'
+        - '-Command "& { start-process "cmd.exe" "/c C:\Users\Administrator\5g.bat"}"'
         
     
       
