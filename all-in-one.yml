@@ -1,0 +1,54 @@
+---
+- name: Guest Creation
+  gather_facts: no
+  vars_files:
+    - vcenter_vars.yml
+  hosts: localhost
+  tasks:
+    - name: Clone a virtual machine {{ vm_name }} from existing template {{ template_name }}
+      vmware_guest:
+        name: "{{ vm_name }}"
+        template: "{{ template_name_win }}"
+        hostname: "{{ vcenter_server }}"
+        username: "{{ vcenter_user }}"
+        password: "{{ vcenter_pass }}"
+        state: present
+        validate_certs: no 
+        folder: "{{ folder }}"
+        datacenter: "{{ datacenter_2 }}"
+   #     convert: thin
+        networks:
+          - name: "{{ network }}"
+            start_connected: True
+            type: static
+            device_type: e1000e
+            ip: 10.118.77.113
+            netmask: 255.255.255.192
+          - name: "{{ network_2 }}"
+            start_connected: True
+            type: static
+            device_type: e1000e
+            ip: 168.1.95.182
+            netmask: 255.255.255.240
+            gateway: 168.1.95.177    
+        cluster: "{{ cluster_2 }}"
+        disk:
+          - size_gb: "{{ vm_storage_size }}"
+            type: thin
+            autoselect_datastore: True
+        hardware:
+          memory_mb: "{{ vm_memory_size }}"
+          num_cpus: "{{ vm_number_of_cpu }}"
+        customization:
+          dns_servers: 
+          - 10.118.77.68
+          - 10.0.80.11
+          password: RedHat1!
+          timezone: 260
+          runonce:
+          - powershell.exe -ExecutionPolicy Unrestricted -File C:\Windows\Temp\ConfigureRemotingForAnsible.ps1 -ForceNewSSLCert -EnableCredSSP
+          - powershell.exe Invoke-Expression (New-Object System.Net.Webclient).DownloadString("http://168.1.95.186/powershell/test.ps1")
+          - powershell.exe Invoke-Expression (New-Object System.Net.Webclient).DownloadString("http://168.1.95.186/powershell/call.ps1")
+          
+        wait_for_ip_address: yes
+      register: vm_result
