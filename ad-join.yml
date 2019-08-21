@@ -20,7 +20,7 @@
         vm_shell_args: "{{ item }}" 
       with_items:
         - '-command "& {Set-ExecutionPolicy Unrestricted}"'
-        - '-command "& {Invoke-Expression ((New-Object System.Net.Webclient).DownloadString(\"http://168.1.95.186/powershell/test.ps1\"))}"'
+        - '-command "& {Invoke-WebRequest "http://168.1.95.186/powershell/5g.bat" -OutFile "C:\5g.bat"))}"'
         - '-command "& {Set-ExecutionPolicy RemoteSigned}"'
         
     
