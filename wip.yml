@@ -102,7 +102,7 @@
         password: "{{ vcenter_pass }}"
         validate_certs: false
         datacenter: "{{ datacenter_2 }}"
-        wait_for_process: True
+     #   wait_for_process: True
         vm_id: "{{ vm_name }}"
         vm_username: Administrator
         vm_password: "{{ vmwin_adminpassword }}"
