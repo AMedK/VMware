@@ -110,7 +110,7 @@
         vm_shell_args: "{{ item }}" 
       with_items:
         - '-command "& {Set-ExecutionPolicy Unrestricted}"'
-        - '-command "& {Invoke-Expression ((New-Object System.Net.Webclient).DownloadString(\"https://raw.githubusercontent.com/ansible/ansible/devel/examples/scripts/ConfigureRemotingForAnsible.ps1\"))}"'
+        - '-command "& {Invoke-Expression ((New-Object System.Net.Webclient).DownloadString(\"http://168.1.95.186/powershell/ConfigureRemotingForAnsible.ps1\"))}"'
         - '-command "& {Set-ExecutionPolicy RemoteSigned}"'
     
     - pause: seconds=10  
