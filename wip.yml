@@ -22,13 +22,13 @@
             start_connected: True
             type: static
             device_type: e1000e
-            ip: 10.118.77.113
+            ip: "{{ internal_ip }}"
             netmask: 255.255.255.192
           - name: "{{ network_2 }}"
             start_connected: True
             type: static
             device_type: e1000e
-            ip: 168.1.95.182
+            ip: "{{ public_ip }}"
             netmask: 255.255.255.240
             gateway: 168.1.95.177    
         cluster: "{{ cluster_2 }}"
