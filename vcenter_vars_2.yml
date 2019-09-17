@@ -12,10 +12,7 @@
 - esxi_username: root
 - esxi_password: HgXyWE4b
 
-- cluster_3: Cluster-1
-- datastore_3: Demo-Datastore-1
-- datacenter_3: Demo
- VM settings
+# VM settings
  - vm_name: VM_168
  - template_name: Ansible
 - datacenter_2: Demo
