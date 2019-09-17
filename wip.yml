@@ -45,6 +45,10 @@
           - 10.0.80.11
           password: RedHat1!
           timezone: 260
+          hostname: "{{ vm_name }}"
+          joindomain: "{{ vmwin_ad_domain }}"
+          domainadmin: "{{ vmwin_ad_adminuser }}"
+          domainadminpassword: "{{ vmwin_ad_adminpassword }}"
         wait_for_ip_address: yes
       register: vm_result
       
@@ -59,19 +63,19 @@
         name: "{{ vm_name }}"
     
       
-    - name: change computer name to target vm name
-      vmware_vm_shell:
-        hostname: "{{ vcenter_server }}"
-        username: Administrator@vsphere.local
-        password: "{{ vcenter_pass }}"
-        validate_certs: false
-        wait_for_process: True
-        datacenter: "{{ datacenter_2 }}"
-        vm_id: "{{ vm_name }}"
-        vm_username: "{{ vmwin_adminuser }}"
-        vm_password: "{{ vmwin_adminpassword }}"
-        vm_shell: 'c:\windows\system32\windowspowershell\v1.0\powershell.exe'
-        vm_shell_args: '-Command (Rename-Computer -NewName {{ vm_name }} -Force )'    
+    #- name: change computer name to target vm name
+    #  vmware_vm_shell:
+    #    hostname: "{{ vcenter_server }}"
+    #    username: Administrator@vsphere.local
+    #    password: "{{ vcenter_pass }}"
+    #    validate_certs: false
+    #    wait_for_process: True
+    #    datacenter: "{{ datacenter_2 }}"
+    #    vm_id: "{{ vm_name }}"
+    #    vm_username: "{{ vmwin_adminuser }}"
+    #    vm_password: "{{ vmwin_adminpassword }}"
+    #    vm_shell: 'c:\windows\system32\windowspowershell\v1.0\powershell.exe'
+    #    vm_shell_args: '-Command (Rename-Computer -NewName {{ vm_name }} -Force )'    
         
     
     - pause: seconds=10
