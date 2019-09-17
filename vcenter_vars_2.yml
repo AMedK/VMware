@@ -15,26 +15,26 @@
 - cluster_3: Cluster-1
 - datastore_3: Demo-Datastore-1
 - datacenter_3: Demo
-# VM settings
-# - vm_name: VM_168
-# - template_name: Ansible
-#- datacenter_2: Demo
-#- cluster_2: Cluster-1
-#- datastore: Demo-Datastore-1
+ VM settings
+ - vm_name: VM_168
+ - template_name: Ansible
+- datacenter_2: Demo
+- cluster_2: Cluster-1
+- datastore: Demo-Datastore-1
 - network: VM-Private
 - network_2: VM-Public
-#- template_name_win: W2k16-Template
+- template_name_win: W2k16-Template
 - folder: /vm
 - dns_server: 8.8.8.8
-#- vm_name: win-pro-testing
-#- vmwin_adminuser: Administrator
-#- vmwin_adminpassword: RedHat1!
-#- vmwin_ad_adminpassword: RedHat1!
-#- vmwin_ad_domain: rhipe.com
-#- vmwin_ad_adminuser: Administrator
-#- vm_memory_size: 4096
-#- vm_number_of_cpu: 2
-#- vm_storage_size: 20
+- vm_name: win-pro-testing
+- vmwin_adminuser: Administrator
+- vmwin_adminpassword: RedHat1!
+- vmwin_ad_adminpassword: RedHat1!
+- vmwin_ad_domain: rhipe.com
+- vmwin_ad_adminuser: Administrator
+- vm_memory_size: 4096
+- vm_number_of_cpu: 2
+- vm_storage_size: 20
 
 # Snapshot settings
 - snapshot: Ansible_snapshot
